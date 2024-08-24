@@ -4,8 +4,7 @@ on:
   workflow_run:
     workflows: ['CI']
     branches: ['main']
-    types:
-      - completed
+    types: [completed]
 
 env:
   PORT: ${{ secrets.PORT }}
@@ -16,11 +15,11 @@ jobs:
     name: deploy
     runs-on: self-hosted
     steps:
-      - name: Copy repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build the docker-compose stack
+      - name: Deploy docker-compose stack
         run: docker compose up -d --build
 
-      - name: Clear all docker unused cache
+      - name: Prune Docker system
         run: docker system prune -af
