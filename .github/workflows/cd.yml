@@ -5,14 +5,14 @@ on:
     workflows: ['CI']
     branches: ['main']
     types: 
-      - completed
+      - requested
 
 env:
   PORT: ${{ secrets.PORT }}
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
 jobs:
-  on-success:
+  deploy:
     name: deploy
     runs-on: self-hosted
     steps:
