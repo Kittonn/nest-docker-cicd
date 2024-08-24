@@ -6,7 +6,11 @@ on:
     branches: ['main']
     types:
       - completed
-  
+
+env:
+  PORT: ${{ secrets.PORT }}
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
 jobs:
   deploy:
     name: deploy
@@ -14,7 +18,7 @@ jobs:
     steps:
       - name: Copy repository
         uses: actions/checkout@v4
-      
+
       - name: Build the docker-compose stack
         run: docker compose up -d --build
 
